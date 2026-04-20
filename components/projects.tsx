@@ -2,8 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ExternalLink, Github, Layers } from "lucide-react";
-import Image from "next/image";
+import { ExternalLink, Code2, Layers } from "lucide-react";
 
 const projects = [
   {
@@ -140,7 +139,7 @@ export function Projects() {
                       href={project.codeUrl}
                       className="flex-1 flex items-center justify-center gap-2 px-4 py-2 border border-border text-foreground rounded-lg font-medium text-sm hover:border-primary hover:text-primary transition-colors"
                     >
-                      <Github className="w-4 h-4" />
+                      <Code2 className="w-4 h-4" />
                       Codigo
                     </a>
                   </div>

@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
+import Link from "next/link";
 
 export function Footer() {
   return (
@@ -19,7 +20,14 @@ export function Footer() {
           <p className="text-muted-foreground text-sm flex items-center gap-2">
             Hecho con{" "}
             <Heart className="w-4 h-4 text-accent fill-accent animate-pulse" />{" "}
-            y mucho codigo
+            y mucho{" "}
+            <Link
+              href="/admin/login"
+              className="text-muted-foreground hover:text-muted-foreground/80 transition-colors cursor-default"
+              aria-label="codigo"
+            >
+              codigo
+            </Link>
           </p>
         </motion.div>
       </div>

@@ -90,10 +90,10 @@ export default function AdminLoginPage() {
               disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full bg-primary text-primary-foreground font-medium py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-violet-600 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2 hover:bg-violet-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed neon-border"
             >
               {isLoading ? (
-                <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
               ) : (
                 <>
                   Sign In

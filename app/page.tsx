@@ -1,14 +1,26 @@
+
+import { About } from "@/components/about";
+import { Contact } from "@/components/contact";
+import { Footer } from "@/components/footer";
+import { Hero } from "@/components/hero";
 import { Navigation } from "@/components/navigation";
 import { ParticlesBackground } from "@/components/particles-background";
-import { Hero } from "@/components/hero";
-import { About } from "@/components/about";
 import { Projects } from "@/components/projects";
-import { Technologies } from "@/components/technologies";
-import { Contact } from "@/components/contact";
 import { SocialLinks } from "@/components/social-links";
-import { Footer } from "@/components/footer";
+import { Technologies } from "@/components/technologies";
+import { supabase } from './lib/supabaseClient';
 
-export default function Home() {
+
+export default async function Home() {
+  const { data, error } = await supabase
+.from('projects')
+.select('*');
+console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
+console.log(data, error);
+
+
+
+
   return (
     <div className="relative min-h-screen animated-gradient">
       <ParticlesBackground />
@@ -25,3 +37,7 @@ export default function Home() {
     </div>
   );
 }
+
+/**NEXT_PUBLIC_SUPABASE_URL=https://lausvlsprpvotypmejom.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_zXMBOIcdCoJ23AKmcEa_jA_eE3DLc1f
+instalar npm  localmente cuando abra el proyecto en mi compu */

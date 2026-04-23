@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Rocket, Target, Zap } from "lucide-react";
+import { useRef } from "react";
 
 const highlights = [
   {
@@ -18,8 +17,8 @@ const highlights = [
   },
   {
     icon: Zap,
-    title: "Alto Rendimiento",
-    description: "Optimizo cada linea de codigo para maxima eficiencia.",
+    title: "Productividad Aumentada Con IA",
+    description: "Apalancamiento mediante las nuevas tecnologias en automatizacion y produccion en tecnologia.",
   },
 ];
 
@@ -50,27 +49,31 @@ export function About() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
+
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-xl" />
               <div className="relative bg-card border border-border rounded-2xl p-8">
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                   Soy una desarrolladora Full Stack apasionada por crear 
-                  soluciones digitales innovadoras. Con experiencia en 
-                  tecnologias modernas, me especializo en transformar ideas 
-                  complejas en aplicaciones web elegantes y funcionales.
+                  soluciones digitales innovadoras y modernas.Combinando desarrollo web con inteligencia artificial y automatización de procesos. 
+      Me especializo en transformar ideas complejas en aplicaciones funcionales, escalables 
+      y alineadas a las necesidades reales de cada negocio.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                  Mi enfoque combina creatividad con precision tecnica, 
-                  asegurando que cada proyecto no solo funcione perfectamente, 
-                  sino que tambien ofrezca una experiencia de usuario excepcional.
+                   Mi enfoque está orientado a la implementación de nuevas tecnologías como IA aplicada, 
+      automatizaciones y herramientas cloud, utilizando soluciones como Supabase,Vercel,V0, Copilot, 
+      Codex, Ollama, n8n, entre otras. Busco optimizar flujos de trabajo, reducir tareas 
+      repetitivas y potenciar la eficiencia tanto en empresas grandes como en proyectos más pequeños.
                 </p>
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Siempre estoy aprendiendo nuevas tecnologias y buscando 
-                  desafios que me permitan crecer como profesional y aportar 
-                  valor a cada proyecto en el que participo.
+                    Creo firmemente en el impacto de la innovación tecnológica como motor de crecimiento. 
+      Por eso, me mantengo en constante aprendizaje, explorando nuevas herramientas y 
+      desarrollando soluciones que no solo funcionen bien, sino que aporten valor real 
+      y diferencial en cada proyecto.
                 </p>
               </div>
             </div>
+
           </motion.div>
 
           <motion.div

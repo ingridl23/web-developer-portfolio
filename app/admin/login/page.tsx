@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Lock, Mail, ArrowRight } from "lucide-react";
+import { ArrowRight, Lock, Mail } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
@@ -36,9 +36,9 @@ export default function AdminLoginPage() {
             >
               <Lock className="w-8 h-8 text-primary" />
             </motion.div>
-            <h1 className="text-2xl font-bold text-foreground">Admin Access</h1>
+            <h1 className="text-2xl font-bold text-foreground">Acceso Administrativo</h1>
             <p className="text-muted-foreground text-sm mt-2">
-              Sign in to manage your portfolio
+              Inicio De Sesion Para Gestion Del Sitio
             </p>
           </div>
 
@@ -69,7 +69,7 @@ export default function AdminLoginPage() {
                 htmlFor="password"
                 className="text-sm font-medium text-foreground"
               >
-                Password
+                Contraseña
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
@@ -108,7 +108,7 @@ export default function AdminLoginPage() {
               href="/"
               className="text-sm text-muted-foreground hover:text-primary transition-colors"
             >
-              Back to portfolio
+              Volver Al Portafolio
             </Link>
           </div>
         </div>

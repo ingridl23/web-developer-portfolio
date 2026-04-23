@@ -1,61 +1,85 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
+import { Code2, ExternalLink, Layers } from "lucide-react";
 import { useRef } from "react";
-import { ExternalLink, Code2, Layers } from "lucide-react";
 
 const projects = [
+
   {
-    title: "E-Commerce Platform",
+    title: "CISNe - Consultorios Interdiciplinarios",
     description:
-      "Plataforma de comercio electronico completa con carrito de compras, pagos integrados y panel de administracion.",
-    image: "/projects/ecommerce.jpg",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
+      "sistema web integral diseñado para la gestión y difusión de servicios profesionales dentro de un entorno de consultorios. La plataforma combina un sitio público informativo con un panel administrativo, permitiendo centralizar la información institucional, mejorar la comunicación con los usuarios y optimizar la gestión interna. El sistema está orientado a brindar una experiencia clara y accesible tanto para pacientes como para profesionales, facilitando el acceso a información relevante sobre servicios, especialistas y novedades.",
+    image: "/projects/cisne.jpg",
+    technologies: ["PHP", "JS", "SQL", "Cloudinary","Laravel","Bootstrap","TailwindCss","Vite"],
     demoUrl: "#",
     codeUrl: "#",
   },
   {
-    title: "Task Management App",
+    title: "Sitio Web Oficina De Empleo Y Emprendedurismo ",
     description:
-      "Aplicacion de gestion de tareas con funcionalidades de colaboracion en tiempo real y notificaciones.",
-    image: "/projects/taskapp.jpg",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma"],
+      "Sitio web para la oficina de Empleo y Emprendedurismo pertenenciente al municipio de Tres Arroyos, Provincia De Buenos Aires. El sistema tiene como finalidad visibilizar, registrar y gestionar los emprendimientos locales y las propuestas de capacitación para la comunidad",
+    image: "/projects/empleo.jpg",
+    technologies: ["PHP","JS", "SQL", "Laravel","Cloudinary","TailwindCss","Bootstrap"],
     demoUrl: "#",
     codeUrl: "#",
   },
   {
-    title: "Social Media Dashboard",
+    title: "App Web Gestion Guardavidas",
     description:
-      "Dashboard de analiticas para redes sociales con graficos interactivos y reportes automatizados.",
-    image: "/projects/dashboard.jpg",
-    technologies: ["Vue.js", "Python", "FastAPI", "Redis"],
+      "Este proyecto consiste en una plataforma web de gestión para guardavidas, cuyo objetivo principal es registrar, organizar y consultar los diferentes acontecimientos que ocurren durante el desarrollo de sus tareas en las playas bajo su supervisión.",
+    image: "/projects/guardavidas.jpg",
+    technologies: ["PHP", "JS", "Laravel", "SQL","TailwindCss","Vite"],
     demoUrl: "#",
     codeUrl: "#",
   },
   {
-    title: "AI Chat Application",
+    title: "App Web Gestion Vehicular",
     description:
-      "Chatbot inteligente con procesamiento de lenguaje natural e integracion con multiples plataformas.",
+      "La municipalidad de Tres Arroyos cuenta con una flota de vehiculos limitada que debe ser compartida entre distintas areas y entes municipales. El presente proyecto propone el desarrollo de un sistema informatico web para organizar,controlar y optimizar el uso de dichos vehiculos.",
     image: "/projects/chatbot.jpg",
-    technologies: ["React", "OpenAI", "Express", "WebSocket"],
+    technologies: ["PHP", "JS", "Laravel", "Cloudinary","TailwindCss","Vite"],
     demoUrl: "#",
     codeUrl: "#",
   },
+
+   
   {
-    title: "Fitness Tracker",
+    title: "App De Entrenamiento Y Nutricion",
     description:
-      "Aplicacion de seguimiento de fitness con planes de entrenamiento personalizados y estadisticas.",
+      "Aplicacion administrativa y de bienestar para entrenadores y deportistas que obtienen planes de vigencia online y que ponen en practica de manera remota o presencial en un establecimiento de entrenamiento.",
     image: "/projects/fitness.jpg",
-    technologies: ["React Native", "Firebase", "Node.js", "Charts"],
+    technologies: ["React Native", "SQL", "Node.js", "Vite","TailwindCss","Cloudinary"],
+    demoUrl: "#",
+    codeUrl: "#",
+  },
+
+ {
+    title: "App Web Gestor De Turnos En Restaurantes",
+    description:
+      "  ",
+    image: "/projects/restaurants.jpg",
+    technologies: ["React Native", "Java","SpringBoot","Spring Security", "Node.js", "TailwindCss"],
+    demoUrl: "#",
+    codeUrl: "#",
+  },
+
+
+  {
+    title: "App De Presencia Emprendedora",
+    description:
+      "Aplicacion de seguimiento de emprendedores y empresas pequeñas que ofrecen uno o varios servicios de diferentes areas",
+    image: "/projects/emprender.jpg",
+    technologies: ["React Native", "Java","SpringBoot","Spring Security", "Node.js", "TailwindCss"],
     demoUrl: "#",
     codeUrl: "#",
   },
   {
-    title: "Portfolio Generator",
+    title: "Developer Portfolio",
     description:
-      "Herramienta para crear portfolios profesionales con plantillas personalizables y exportacion.",
+      "ESte mismo portfolio web",
     image: "/projects/portfolio.jpg",
-    technologies: ["Next.js", "Tailwind", "Vercel", "MDX"],
+    technologies: ["TS", "Tailwind", "Vercel","Auth0", "Supabase","Vite"],
     demoUrl: "#",
     codeUrl: "#",
   },

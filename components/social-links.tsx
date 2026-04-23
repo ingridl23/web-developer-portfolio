@@ -40,7 +40,7 @@ const socialLinks = [
   },
   {
     name: "Instagram",
-    icon: InstagramIcon,
+    icon: TwitterIcon,
     href: "https://instagram.com/guiasvirtualesingrid",
     color: "#1DA1F2",
     hoverGlow: "rgba(29, 161, 242, 0.5)",

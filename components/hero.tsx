@@ -39,7 +39,7 @@ export function Hero() {
         >
           <span className="text-foreground">Hola, soy </span>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-accent text-glow-primary">
-            Ingrid
+            Ledesma Ingrid
           </span>
         </motion.h1>
 
@@ -53,10 +53,8 @@ export function Hero() {
             <Code2 className="w-8 h-8 text-secondary" />
             <TypewriterText
               texts={[
-                "Desarrolladora Full Stack",
-                "Frontend Developer",
-                "Backend Developer",
-                "UI/UX Enthusiast",
+                "Desarrolladora Full Stack"
+  
               ]}
               className="text-foreground"
             />
@@ -70,8 +68,7 @@ export function Hero() {
           className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed"
         >
           Transformo ideas en experiencias digitales extraordinarias. 
-          Especializada en crear aplicaciones web modernas, escalables y con 
-          interfaces que cautivan.
+          Especializada en crear aplicaciones web modernas y apoyo tecnologico automatizado para empresas grandes y pequeñas.
         </motion.p>
 
         <motion.div
@@ -91,7 +88,7 @@ export function Hero() {
             onClick={scrollToContact}
             className="px-8 py-4 border-2 border-primary rounded-full font-semibold text-primary hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 hover:glow-primary"
           >
-            Contactarme
+            Contacto
           </button>
         </motion.div>
 

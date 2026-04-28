@@ -1,8 +1,8 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { Mail } from "lucide-react";
+import { useRef } from "react";
 
 // Custom SVG icons for social platforms
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -34,21 +34,21 @@ const socialLinks = [
   {
     name: "LinkedIn",
     icon: LinkedinIcon,
-    href: "https://linkedin.com/in/",
+    href: "https://linkedin.com/in/ingrid-ledesma",
     color: "#0A66C2",
     hoverGlow: "rgba(10, 102, 194, 0.5)",
   },
   {
-    name: "Twitter",
+    name: "Instagram",
     icon: TwitterIcon,
-    href: "https://twitter.com/",
+    href: "https://instagram.com/guiasvirtualesingrid",
     color: "#1DA1F2",
     hoverGlow: "rgba(29, 161, 242, 0.5)",
   },
   {
     name: "Email",
     icon: Mail,
-    href: "mailto:contacto@ingrid.dev",
+    href: "mailto:ingridledesma22@gmail.com",
     color: "#EC4899",
     hoverGlow: "rgba(236, 72, 153, 0.5)",
   },

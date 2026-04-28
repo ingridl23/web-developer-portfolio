@@ -10,7 +10,6 @@ import {
   Plus,
   Type,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -293,6 +292,14 @@ const handleEdit = (project: Project) => {
   });
 };
 
+/**
+ *   <Link
+              href="/"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View Site
+            </Link>
+ */
 
   return (
     <div className="min-h-screen bg-background">
@@ -301,12 +308,7 @@ const handleEdit = (project: Project) => {
         <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
           <h1 className="text-xl font-bold text-foreground">Admin Dashboard</h1>
           <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              View Site
-            </Link>
+        
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-accent transition-colors"

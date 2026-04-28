@@ -8,7 +8,7 @@ import { ParticlesBackground } from "@/components/particles-background";
 import { Projects } from "@/components/projects";
 import { SocialLinks } from "@/components/social-links";
 import { Technologies } from "@/components/technologies";
-import { supabase } from './lib/supabaseClient';
+import { supabase } from '../lib/supabaseClient';
 
 
 export default async function Home() {
@@ -37,6 +37,8 @@ console.log(data, error);
     </div>
   );
 }
+
+
 
 /**NEXT_PUBLIC_SUPABASE_URL=https://lausvlsprpvotypmejom.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sb_publishable_zXMBOIcdCoJ23AKmcEa_jA_eE3DLc1f

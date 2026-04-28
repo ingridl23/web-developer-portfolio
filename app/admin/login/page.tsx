@@ -1,22 +1,78 @@
 "use client";
-
+//admin/login/page.tsx
+import { supabase } from "@/lib/supabaseClient";
 import { motion } from "framer-motion";
 import { ArrowRight, Lock, Mail } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     // TODO: Connect Supabase authentication here
-    // For now, just simulate loading
-    setTimeout(() => setIsLoading(false), 1000);
-  };
+
+
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  console.log("LOGIN DATA:", data);
+  console.log("LOGIN ERROR:", error);
+
+  if (error) {
+    alert(error.message);
+  } else if (data.user) {
+
+  
+    //opcion 1
+  //  router.push("/admin/dashboard");
+  //opcion 2
+   console.log("REDIRECTING...");
+  router.replace("/admin/dashboard");
+//utilizar la alternativa de route.replace nos = evita problemas de historial y suele ser más estable en auth flows.
+  } else {
+    alert("No se pudo iniciar sesión");
+  }
+
+  setIsLoading(false);
+};
+
+
+
+
+
+    /*
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
+
+  const { error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    alert(error.message);
+  } else {
+    //window.location.href = "/admin/dashboard";
+    router.push("/admin/dashboard");
+  }
+
+  setIsLoading(false);
+};
+
+*/
+
+ 
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4">

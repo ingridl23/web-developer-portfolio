@@ -1,4 +1,4 @@
-
+'use client'
 import { About } from "@/components/about";
 import { Contact } from "@/components/contact";
 import { Footer } from "@/components/footer";
@@ -8,17 +8,29 @@ import { ParticlesBackground } from "@/components/particles-background";
 import { Projects } from "@/components/projects";
 import { SocialLinks } from "@/components/social-links";
 import { Technologies } from "@/components/technologies";
-import { supabase } from '../lib/supabaseClient';
+import { supabase } from "@/lib/supabaseClient";
+import { useEffect, useState } from "react";
 
 
-export default async function Home() {
-  const { data, error } = await supabase
-.from('projects')
-.select('*');
-console.log(process.env.NEXT_PUBLIC_SUPABASE_URL);
-console.log(data, error);
+export default  function Home() {
+  
+  type Project = {
+    id: string;
+    title: string;
+    description: string;
+    image?: string;
+  };
+ 
+const [projects, setProjects] = useState<Project[]>([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await supabase.from("projects").select("*") as { data: Project[] | null };
+      setProjects(data || []);
+    };
 
+    fetchData();
+  }, []);
 
 
   return (

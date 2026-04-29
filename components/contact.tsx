@@ -36,6 +36,22 @@ export function Contact() {
 
     if (error) throw error;
 
+  // enviar email
+    const response = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Error enviando email");
+    }
+
+
+
+
     setFormStatus("success");
 
     setFormData({

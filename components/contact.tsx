@@ -1,9 +1,8 @@
 "use client";
-
+import { supabase } from "@/lib/supabaseClient";
 import { motion, useInView } from "framer-motion";
+import { AlertCircle, CheckCircle, Mail, MessageSquare, Send, User } from "lucide-react";
 import { useRef, useState } from "react";
-import { Send, CheckCircle, AlertCircle, Mail, User, MessageSquare } from "lucide-react";
-
 type FormStatus = "idle" | "submitting" | "success" | "error";
 
 export function Contact() {
@@ -16,20 +15,48 @@ export function Contact() {
     message: "",
   });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormStatus("submitting");
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
-    // For demo purposes, always succeed
+  if (!formData.name || !formData.email || !formData.message) {
+    setFormStatus("error");
+    return;
+  }
+
+  setFormStatus("submitting");
+
+  try {
+    const { error } = await supabase.from("contacts").insert([
+      {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      },
+    ]);
+
+    if (error) throw error;
+
     setFormStatus("success");
-    setFormData({ name: "", email: "", message: "" });
-    
-    // Reset status after 3 seconds
-    setTimeout(() => setFormStatus("idle"), 3000);
-  };
+
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+
+    setTimeout(() => {
+      setFormStatus("idle");
+    }, 3000);
+
+  } catch (error) {
+    console.error("Error enviando formulario:", error);
+    setFormStatus("error");
+
+    setTimeout(() => {
+      setFormStatus("idle");
+    }, 3000);
+  }
+};
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

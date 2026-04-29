@@ -1,6 +1,6 @@
-import type { Metadata, Viewport } from "next";
-import { Orbitron, Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import type { Metadata, Viewport } from "next";
+import { Inter, Orbitron } from "next/font/google";
 import "./globals.css";
 
 const orbitron = Orbitron({

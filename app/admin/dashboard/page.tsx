@@ -41,17 +41,57 @@ const initialFormData: ProjectFormData = {
 };
 
 
+//******************************************************************************* */
+//*************************** interfaces technologies data ********************** */
+/******************************************************************************* */
+interface TechnologyFormData {
+  name: string;
+  image_url: string;
+  image_path: string;
+  type: string;
+}
+
+interface Technology {
+  id: number;
+  name: string;
+  image_url: string;
+  image_path: string;
+  type: string;
+  created_at: string;
+}
+
+
+const initial2FormData: TechnologyFormData = {
+  name: "",
+  image_url: "",
+  image_path: "",
+  type: "",
+ 
+};
 
 
 export default function AdminDashboardPage() {
+
+  //const y declaraciones para projects 
   const [formData, setFormData] = useState<ProjectFormData>(initialFormData);
   const [isSubmitting, setIsSubmitting] = useState(false);
-const [imageFile, setImageFile] = useState<File | null>(null);
-const [projects, setProjects] = useState<Project[]>([]);
-const [editingProject, setEditingProject] = useState<Project | null>(null);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [editingProject, setEditingProject] = useState<Project | null>(null);
   const router = useRouter();
 
-  
+
+//*********************************************************************** */
+//const y declaraciones para technologies  |  |  |
+//                                         v  v  v
+//************************************************************************* */
+  const [formDataTech, setFormDataTech] = useState<TechnologyFormData>(initial2FormData);
+  const [isSubmittingTech, setIsSubmittingTech] = useState(false);
+  const [imageFileTech, setImageFileTech] = useState<File | null>(null);
+  const [technologies, setTechnologies] = useState<Technology[]>([]);
+  const [editingTechnology, setEditingTechnology] = useState<Technology | null>(null);
+
+//************************************************************************* */
 const fetchProjects = async () => {
   const { data, error } = await supabase
     .from("projects")
@@ -65,10 +105,31 @@ const fetchProjects = async () => {
   }
 };
 
+/******************************************************************************* */
+//const fetchTechnologies 
+const fetchTechnologies = async () => {
+  const { data, error } = await supabase
+    .from("technologies")
+    .select("*")
+    .order("created_at", { ascending: false });
 
- useEffect(() => {
+  if (error) {
+    console.log("ERROR FETCH:", error);
+  } else {
+    setTechnologies(data);
+  }
+};
+
+
+
+
+
+
+
+/*********************************************************************************** */
+
+useEffect(() => {
   const init = async () => {
-    // 1. Check auth
     const { data } = await supabase.auth.getUser();
 
     if (!data.user) {
@@ -76,23 +137,12 @@ const fetchProjects = async () => {
       return;
     }
 
-    // 2. Fetch projects
-    const { data: projectsData, error } = await supabase
-      .from("projects")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (error) {
-      console.log("ERROR FETCH:", error);
-    } else {
-      setProjects(projectsData);
-    }
-    await fetchProjects(); 
+    await fetchProjects();
+    await fetchTechnologies();
   };
+
   init();
 }, []);
-
-
 
 
 /**
@@ -126,7 +176,24 @@ público:
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  //************************************************************** */
+  //************* handleChange para technologies ********************
 
+  const handleChangeTech = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+) => {
+  const { name, value } = e.target;
+
+  setFormDataTech((prev) => ({
+    ...prev,
+    [name]: value,
+  }));
+};
+
+
+
+/**************************************************************** */
+/**************************************************************** */
 const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
   setIsSubmitting(true);
@@ -249,6 +316,118 @@ const updatedFields: Partial<Project> = {
   
 };
 
+
+
+
+/************************************************************************************* */
+/****************** handleSubmit para technologies *********************************** */
+//************************************************************************************ */
+const handleSubmitTechnology = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmittingTech(true);
+
+  try {
+    // UPDATE
+    if (editingTechnology) {
+      const updatedFields: Partial<Technology> = {
+        name: formDataTech.name,
+        type: formDataTech.type,
+      };
+
+      // nueva imagen opcional
+      if (imageFileTech) {
+        const fileName = `${Date.now()}-${imageFileTech.name}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from("technologies")
+          .upload(fileName, imageFileTech);
+
+        if (uploadError) {
+          alert("Error subiendo nueva imagen");
+          return;
+        }
+
+        const { data } = supabase.storage
+          .from("technologies")
+          .getPublicUrl(fileName);
+
+        updatedFields.image_url = data.publicUrl;
+        updatedFields.image_path = fileName;
+      }
+
+      const { error } = await supabase
+        .from("technologies")
+        .update(updatedFields)
+        .eq("id", editingTechnology.id);
+
+      if (error) {
+        alert("Error actualizando tecnología");
+      } else {
+        alert("Tecnología actualizada");
+
+        setEditingTechnology(null);
+        setFormDataTech(initial2FormData);
+        setImageFileTech(null);
+
+        await fetchTechnologies();
+      }
+
+      return;
+    }
+
+    // CREATE
+    if (!imageFileTech) {
+      alert("Subí una imagen");
+      return;
+    }
+
+    const fileName = `${Date.now()}-${imageFileTech.name}`;
+
+    const { error: uploadError } = await supabase.storage
+  .from("technologies")
+  .upload(fileName, imageFileTech, {
+    upsert: true,
+  });
+
+    if (uploadError) {
+      alert("Error subiendo imagen");
+      return;
+    }
+
+    const { data } = supabase.storage
+      .from("technologies")
+      .getPublicUrl(fileName);
+
+    const { error } = await supabase.from("technologies").insert([
+      {
+        name: formDataTech.name,
+        image_url: data.publicUrl,
+        image_path: fileName,
+        type: formDataTech.type,
+      },
+    ]);
+
+    if (error) {
+      alert("Error guardando tecnología");
+    } else {
+      alert("Tecnología creada");
+
+      setFormDataTech(initial2FormData);
+      setImageFileTech(null);
+
+      await fetchTechnologies();
+    }
+  } catch (error) {
+    console.log(error);
+    alert("Error inesperado");
+  }finally {
+    setIsSubmittingTech(false);
+  }
+};
+
+/************************************************************************************** */
+/************************************************************************************** */
+/************************************************************************************** */
 //funcionalidad para eliminar un proyecto publicado en el sitio
 const handleDelete = async (project: Project) => {
   const confirmDelete = confirm("¿Eliminar proyecto?");
@@ -278,7 +457,36 @@ const handleDelete = async (project: Project) => {
   }
 };
 
+/****************************************************************************************************************** */
+/****************************************************************************************************************** */
+//********************* handle para eliminar technologies ********************************************************* */
+const handleDeleteTechnology = async (tech: Technology) => {
+  const confirmDelete = confirm("¿Eliminar tecnología?");
+  if (!confirmDelete) return;
 
+  await supabase.storage
+    .from("technologies")
+    .remove([tech.image_path]);
+
+  const { error } = await supabase
+    .from("technologies")
+    .delete()
+    .eq("id", tech.id);
+
+  if (error) {
+    alert("Error eliminando");
+  } else {
+    alert("Tecnología eliminada");
+    await fetchTechnologies();
+  }
+};
+
+
+
+
+
+
+/****************************************************************************************************************** */
 //funcionalidad de actualizacion de proyectos cargados al sitio 
 
 const handleEdit = (project: Project) => {
@@ -292,6 +500,27 @@ const handleEdit = (project: Project) => {
   });
 };
 
+/******************************************************************************************************************* */
+//********************************** handle update para technologies ********************************************** */
+//**************************************************************************************************************** */
+
+const handleEditTechnology = (tech: Technology) => {
+  setEditingTechnology(tech);
+
+  setFormDataTech({
+    name: tech.name,
+    image_url: tech.image_url,
+    image_path: tech.image_path,
+    type: tech.type,
+  });
+};
+
+
+
+
+
+
+//***************************************************************************************************************** */
 /**
  *   <Link
               href="/"
@@ -400,6 +629,7 @@ const handleEdit = (project: Project) => {
   accept="image/*"
   onChange={(e) => setImageFile(e.target.files?.[0] || null)}
 />
+
               </div>
 
               {/* URLs Row */}
@@ -464,9 +694,85 @@ const handleEdit = (project: Project) => {
               </motion.button>
             </form>
           </div>
+
+
+          
         </motion.div>
 
-       
+<div className="bg-card border border-border rounded-lg p-6 mt-10">
+  <h2 className="text-lg font-semibold mb-4">
+  {editingTechnology ? "Update Technology" : "Create Technology"}
+</h2>
+
+  <form onSubmit={handleSubmitTechnology} className="space-y-4">
+    <input
+      type="text"
+      name="name"
+      placeholder="React"
+      value={formDataTech.name}
+      onChange={handleChangeTech}
+      className="w-full border rounded p-3"
+      required
+    />
+
+    <select
+      name="type"
+      value={formDataTech.type}
+      onChange={handleChangeTech}
+      className="w-full border rounded p-3"
+      required
+    >
+      <option value="">Seleccionar categoría</option>
+      <option value="frontend">Frontend</option>
+      <option value="backend">Backend</option>
+      <option value="database">Database</option>
+      <option value="tools">Tools</option>
+    </select>
+
+   <input
+  type="file"
+  accept="image/*"
+  onChange={(e) => setImageFileTech(e.target.files?.[0] || null)}
+  required={!editingTechnology}
+/>
+
+    {imageFileTech && (
+      <p className="text-sm text-green-500">
+        {imageFileTech.name}
+      </p>
+    )}
+
+    <button
+      type="submit"
+      disabled={isSubmittingTech}
+      className="w-full bg-primary text-white p-3 rounded"
+    >
+      {isSubmittingTech
+  ? "Guardando..."
+  : editingTechnology
+  ? "Actualizar tecnología"
+  : "Crear tecnología"}
+    </button>
+
+    {editingTechnology && (
+  <button
+    type="button"
+    onClick={() => {
+      setEditingTechnology(null);
+      setFormDataTech(initial2FormData);
+      setImageFileTech(null);
+    }}
+    className="w-full border p-3 rounded mt-2"
+  >
+    Cancelar edición
+  </button>
+)}
+  </form>
+</div>
+
+
+
+
 <div className="mt-10">
   <h2 className="text-lg font-semibold mb-4">Proyectos creados</h2>
 
@@ -498,9 +804,54 @@ const handleEdit = (project: Project) => {
     ))}
   </div>
 </div>
+
+
+
+
+
+<div className="mt-10">
+  <h2 className="text-lg font-semibold mb-4">
+    Technologies creadas
+  </h2>
+
+<div className="grid md:grid-cols-3 gap-4">
+  {technologies.map((tech) => (
+    <div key={tech.id} className="border rounded p-4 bg-card">
+      <img
+        src={tech.image_url}
+        className="w-full h-24 object-cover rounded"
+      />
+
+      <h3 className="font-semibold mt-2">{tech.name}</h3>
+      <p className="text-sm text-muted-foreground">{tech.type}</p>
+
+      <button
+        onClick={() => handleDeleteTechnology(tech)}
+        className="mt-3 px-3 py-2 rounded bg-red-500 text-white text-sm"
+      >
+        Eliminar
+      </button>
+      <button
+  onClick={() => handleEditTechnology(tech)}
+  className="mt-2 px-3 py-2 rounded bg-blue-500 text-white text-sm"
+>
+  Editar
+</button>
+    </div>
+  ))}
+</div>
+</div>
+
+
       </main>
     </div>
   );
+
+
+
+
+
+
 
 }
 

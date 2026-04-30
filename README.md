@@ -1,36 +1,104 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Portfolio
 
-## Getting Started
+Portfolio web profesional desarrollado para presentar mis proyectos, experiencia y stack tecnológico como desarrolladora de software.
 
-First, run the development server:
+## Demo
+
+🔗 Live Site: https://web-developer-portfolio-git-main-ingridl23s-projects.vercel.app/
+
+---
+
+## Tecnologías utilizadas en este proyecto
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase
+- Resend
+- Vercel
+
+---
+
+## Features
+
+- Diseño responsive
+- Interfaz moderna y animaciones
+- Gestión dinámica de proyectos
+- Gestión dinámica de tecnologías
+- Panel de administración
+- Upload de imágenes
+- Formulario de contacto funcional con envío de emails
+
+---
+
+## Instalación local
+
+Clonar repositorio:
+
+```bash
+git clone [https://github.com/ingridl23/web-developer-portfolio.git]
+```
+
+Ingresar al proyecto:
+
+```bash
+cd nombre_repo
+```
+
+Instalar dependencias:
+
+```bash
+npm install
+```
+```bash
+npm install resend
+```
+```bash
+npm install @supabase/supabase-js
+```
+
+Ejecutar entorno local:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir en navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## Variables de entorno
 
-To learn more about Next.js, take a look at the following resources:
+Crear archivo `.env`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+RESEND_API_KEY=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Preview
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![Portfolio Preview](./public/preview.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## Sobre mí
+
+Soy desarrolladora de aplicaciones informáticas enfocada en desarrollo web moderno, automatización e integración de inteligencia artificial.
+
+Me interesa construir soluciones funcionales, escalables y visualmente atractivas utilizando tecnologías actuales.
+
+---
+
+## Contacto
+
+- LinkedIn: https://ar.linkedin.com/in/ingrid-ledesma
+- Email: ingridledesma22@gmail.com

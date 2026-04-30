@@ -86,7 +86,7 @@ RESEND_API_KEY=
 
 ## Preview
 
-![Portfolio Preview](./public/preview.png)
+![Portfolio Preview](./public/previewPortfolio.png)
 
 ---
 
